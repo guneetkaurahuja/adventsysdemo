@@ -36,6 +36,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -46,5 +56,15 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>demo</id>
+			<name>adventsysdemo</name>
+			<url>file:///Users/bhavneet/mycode/adventsysdemo</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
 
 </project>
