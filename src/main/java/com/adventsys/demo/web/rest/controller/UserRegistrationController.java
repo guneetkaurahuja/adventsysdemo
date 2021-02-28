@@ -26,13 +26,14 @@ public class UserRegistrationController {
         Optional<User> user = userRepository.findById(userLogin.getEmailid());
         if (StringUtils.isBlank(userLogin.getEmailid()) || StringUtils.isBlank(userLogin.getPassword())) return null;
         if (user.isPresent() && StringUtils.equals(userLogin.getPassword(), user.get().getPassword())) return user.get();
-        return null;
+        return null;//TODO throw illegal argument exception for invalid username or password
     }
 
     @PostMapping(value = "/registeruser", produces = {MediaType.APPLICATION_JSON_VALUE},consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean registerUser(@RequestBody User user) {
         if (user != null && validateUser(user)) {
-            userRepository.save(user);
+            userRepository.save(user);//TODO validate if the user already exists and put a time out in case db takes
+            // more than desired time
             return true;
         }
         return false;
