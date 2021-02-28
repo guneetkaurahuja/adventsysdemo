@@ -1,9 +1,8 @@
-CREATE TABLE `userdetail` (
-  `name` varchar(10) NOT NULL,
-  `emailid` varchar(45) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `fullname` varchar(45) NOT NULL,
-  `address` varchar(60) NOT NULL,
+CREATE TABLE `user` (
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `emailid` varchar(200) COLLATE utf8_bin NOT NULL,
+  `username` varchar(200) COLLATE utf8_bin NOT NULL,
+  `password` varchar(200) COLLATE utf8_bin NOT NULL,
+  `address` varchar(200) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`emailid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
