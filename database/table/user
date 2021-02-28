@@ -1,0 +1,9 @@
+CREATE TABLE `userdetail` (
+  `name` varchar(10) NOT NULL,
+  `emailid` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `fullname` varchar(45) NOT NULL,
+  `address` varchar(60) NOT NULL,
+  PRIMARY KEY (`emailid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
