@@ -5,10 +5,13 @@ import com.adventsys.demo.model.UserLogin;
 import com.adventsys.demo.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +28,7 @@ public class UserRegistrationController {
 
         Optional<User> user = userRepository.findById(userLogin.getEmailid());
         if (StringUtils.isBlank(userLogin.getEmailid()) || StringUtils.isBlank(userLogin.getPassword())) return null;
-        if (user.isPresent() && StringUtils.equals(userLogin.getPassword(), user.get().getPassword())) return user.get();
+        if (user.isPresent() && StringUtils.equals(userLogin.getPassword(), user.get().getPassword())) return user.get();//TODO issue authentication cookie in this case.
         return null;//TODO throw illegal argument exception for invalid username or password
     }
 
@@ -43,4 +46,26 @@ public class UserRegistrationController {
         //TODO add necessary validations
         return true;
     }
+
+    @GetMapping(value = "/getallusers", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<User> getAll(){
+        List<User> result = new ArrayList<>();
+        Iterable<User> userIterator = userRepository.findAll();
+        userIterator.forEach(user -> result.add(user));
+        return result;
+    }
+
+    //API for the admin to update a user details
+    @PostMapping(value = "/updateuser", produces = {MediaType.APPLICATION_JSON_VALUE},consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean updateUser(@RequestBody User user, User loggedInUser) {
+        if (user != loggedInUser || !loggedInUser.isIsadmin()) return false;
+        //Check the permissions of the users logged if he has admin permission only then allow this operation.
+        if (user != null && validateUser(user)) {
+            userRepository.deleteById(user.getEmailid());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
 }

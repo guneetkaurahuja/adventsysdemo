@@ -17,7 +17,13 @@ public class User {
 
     private String password;
 
+    private String gender;
+
+    private String dob;
+
     private String address;
+
+    private boolean isadmin;
 
     public String getName() {
         return name;
@@ -29,6 +35,30 @@ public class User {
 
     public String getEmailid() {
         return emailid;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public boolean isIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
     }
 
     public void setEmailid(String emailid) {
